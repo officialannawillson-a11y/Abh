@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video + Image Ads</title>
+
+<style>
+body{
+  margin:0;
+  background:#000;
+  font-family:Arial, sans-serif;
+  text-align:center;
+}
+
+/* IMAGE SECTION */
+.image-box{
+  position:relative;
+  max-width:600px;
+  margin:20px auto;
+}
+
+.image-box img{
+  width:100%;
+  display:none;
+}
+
+.image-box img.active{
+  display:block;
+}
+
+/* invisible clickable layer on image */
+.img-ad{
+  position:absolute;
+  inset:0;
+  z-index:5;
+}
+
+/* VIDEO */
+.video-box{
+  position:relative;
+  max-width:600px;
+  margin:20px auto;
+}
+
+.video-box video{
+  width:100%;
+}
+
+/* clickable overlay on video */
+.video-ad{
+  position:absolute;
+  inset:0;
+  z-index:5;
+}
+</style>
+</head>
+
+<body>
+
+<!-- IMAGES -->
+<div class="image-box">
+  <img src="img1.jpg" class="active">
+  <img src="img2.jpg">
+  <img src="img3.jpg">
+  <img src="img4.jpg">
+
+  <div class="img-ad" onclick="imageAdClick()"></div>
+</div>
+
+<!-- VIDEO -->
+<div class="video-box">
+  <video controls poster="thumb.jpg">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-ad" onclick="videoAdClick()"></div>
+</div>
+
+<script>
+// 🔗 APNE ADSTERRA LINKS YAHAN LAGAO
+let imageAds = [
+  "https://YOUR_ADSTERRA_LINK_1",
+  "https://YOUR_ADSTERRA_LINK_2",
+  "https://YOUR_ADSTERRA_LINK_3",
+  "https://YOUR_ADSTERRA_LINK_4"
+];
+
+let videoAds = [
+  "https://YOUR_ADSTERRA_VIDEO_LINK_1",
+  "https://YOUR_ADSTERRA_VIDEO_LINK_2"
+];
+
+let currentImage = 0;
+let currentVideoAd = 0;
+
+/* IMAGE CLICK */
+function imageAdClick(){
+  window.open(imageAds[currentImage], "_blank");
+
+  // next image show
+  let imgs = document.querySelectorAll(".image-box img");
+  imgs[currentImage].classList.remove("active");
+
+  currentImage++;
+  if(currentImage >= imgs.length){
+    currentImage = imgs.length - 1;
+  }
+
+  imgs[currentImage].classList.add("active");
+}
+
+/* VIDEO CLICK */
+function videoAdClick(){
+  window.open(videoAds[currentVideoAd], "_blank");
+
+  currentVideoAd++;
+  if(currentVideoAd >= videoAds.length){
+    document.querySelector(".video-ad").style.display="none";
+  }
+}
+</script>
+
+</body>
+</html>
